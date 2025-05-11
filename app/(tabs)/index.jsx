@@ -1,6 +1,6 @@
 import guitarbg from '@/assets/images/guitarbg.png';
 import React, { useState } from 'react';
-import { Alert, Button, ImageBackground, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, ImageBackground, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -11,6 +11,7 @@ const CH_NUM = ["I", "ii", "iii", "IV", "V", "vi", "vii°"];
 export default function Index() {
   
   const [ key, setKey ] = useState('');
+  const [ chords, setChords ] = useState([]); 
   
   const handleKeyInput = () => {
 
@@ -25,7 +26,27 @@ export default function Index() {
     let root = NOTES.indexOf(key.toUpperCase());
     console.log(root);
 
+    for (let offsetIndex = 0; offsetIndex < CHORDS_LOC.length; offsetIndex++) {
+      if (root + CHORDS_LOC[offsetIndex] >= NOTES.length) {
+        root = root + CHORDS_LOC[offsetIndex] - NOTES.length;
+      } else {
+        root += CHORDS_LOC[offsetIndex];
+      }
+      // console.log("Root = " + root);
 
+      let chord_name = NOTES[root] + (MAJ_MIN_MAP[offsetIndex] === 0 ? "m" : (MAJ_MIN_MAP[offsetIndex] === 2 ? "dim" : "") ); 
+
+      console.log({
+        numeral: CH_NUM[offsetIndex], 
+        name: chord_name
+      });
+      chords.push({
+        numeral: CH_NUM[offsetIndex], 
+        name: chord_name
+      });
+    }
+    
+    setChords(chords);
   }
 
   return (
@@ -50,6 +71,20 @@ export default function Index() {
           <Pressable style={styles.button} onPress={handleKeyInput} >
             <Text style={styles.buttonText}>Get Chords</Text>
           </Pressable>
+
+          <View style={styles.results}>
+            {chords.map((chord, index) => (
+              <Text key={index} style={styles.resultText}>
+                {chord.numeral}: {chord.name}
+              </Text>
+            ))}
+          </View>
+          <View style={styles.results}>
+
+            { chords.length > 5 && (
+              <Text style={styles.resultText}>Relative Minor Key is {chords[5].name}</Text>
+            )}
+          </View>
  
         </ImageBackground>
       </View>
@@ -103,11 +138,13 @@ const styles = StyleSheet.create({
   results: {
     width: '80%',
     zIndex: 1,
+    marginBottom: 20
   },
   resultText: {
     color: 'white',
     fontSize: 18,
     marginBottom: 6,
+    fontWeight: 'bold'
   },
   button: {
     padding: 9,

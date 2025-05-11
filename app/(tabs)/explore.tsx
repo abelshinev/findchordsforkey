@@ -12,7 +12,7 @@ export default function Index() {
   
   const [ key, setKey ] = useState('');
   
-  const handleKeyInput = () => {
+  const handleChordsInput = () => {
     Alert.alert("You entered the chords: " + key)
   }
 

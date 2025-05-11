@@ -4,7 +4,7 @@
     "slug": "chordsotkey",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/guitarico.png",
     "scheme": "chordsotkey",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

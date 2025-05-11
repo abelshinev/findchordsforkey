@@ -1,6 +1,6 @@
 import guitarbg from '@/assets/images/guitarbg.png';
 import React, { useState } from 'react';
-import { Alert, Button, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, ImageBackground, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -13,7 +13,19 @@ export default function Index() {
   const [ key, setKey ] = useState('');
   
   const handleKeyInput = () => {
-    Alert.alert("You entered the chords: " + key)
+
+    console.log("Key of " + key + " entered")
+
+    if (!NOTES.includes(key.toUpperCase())) {
+      Alert.alert("Invalid Key: " + key)
+      return;
+    } 
+
+    let chords = [];
+    let root = NOTES.indexOf(key.toUpperCase());
+    console.log(root);
+
+
   }
 
   return (
@@ -27,15 +39,17 @@ export default function Index() {
           style={styles.image}
         >
           <View style={styles.overlay} />
-          <Text style={styles.text}>Transpose</Text>
+          <Text style={styles.text}>Find my Chords</Text>
           <TextInput
             style={styles.input}
-            placeholder='Enter Chords '
+            placeholder='Type Key '
             placeholderTextColor={'grey'}
             value={key}
             onChangeText={setKey}
           />
-          <Text style={styles.text} >Work In Progress..</Text>
+          <Pressable style={styles.button} onPress={handleKeyInput} >
+            <Text style={styles.buttonText}>Get Chords</Text>
+          </Pressable>
  
         </ImageBackground>
       </View>
@@ -96,9 +110,16 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   button: {
-    padding: 50,
-    backgroundColor: 'rgba(50, 50, 50, 0.5)',
-    borderRadius: 10,
-    width: 100,
-  }
+    padding: 9,
+    backgroundColor: 'rgba(200, 200, 200, 0.9)',
+    borderRadius: 7,
+    color: "white",
+  },
+  buttonText: {
+    color: 'black',
+    textAlign: 'center',
+    fontWeight: 500,
+    paddingHorizontal: 10
+  },
+
 });

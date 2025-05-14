@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "chordsotkey",
+    "name": "FindMyChords",
     "slug": "chordsotkey",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/guitarico.png",
+    "icon": "./assets/images/guitar-icon.png",
     "scheme": "chordsotkey",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,10 +13,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-guitar.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.abelshinev.FindMyChords"
     },
     "web": {
       "bundler": "metro",
@@ -28,7 +29,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/splash-guitar.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -37,6 +38,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c78bb0f5-4631-4ad8-be3e-6fb0994eb055"
+      }
+    },
+    "owner": "abelshinev"
   }
 }

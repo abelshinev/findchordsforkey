@@ -15,24 +15,31 @@ export default function Index() {
   const handleChordsInput = () => {
     console.log("You entered the chords: " + chords + "\nTranspose: " + transpose)
     let transposedChordList = []
-    
-    let currentNodeIndex = NOTES.indexOf(chords.toUpperCase())
-    if (currentNodeIndex === -1) {
-      console.log("Trying with minor")
-      currentNodeIndex = MINOR_NOTES.indexOf(chords)
-      if (currentNodeIndex === -1) {
-        Alert.alert("Not a Chord!");
-        return;
-      }
-      console.log(currentNodeIndex)
-      transposedChordList.push(MINOR_NOTES[(currentNodeIndex - transpose + MINOR_NOTES.length) % MINOR_NOTES.length])
-      console.log(transposedChordList)
 
-    } else {
-      console.log(currentNodeIndex)
-      transposedChordList.push(NOTES[(currentNodeIndex - transpose + NOTES.length) % NOTES.length])
-      console.log(transposedChordList)
+    let chordList = chords.trim().split(/\s+/);
+    console.log(chordList);
+
+    for (let chordIndex = 0; chordIndex < chordList.length; chordIndex++) {
+      let currentNoteIndex = NOTES.indexOf(chordList[chordIndex].toUpperCase())
+      if (currentNoteIndex === -1) {
+        console.log("Trying with minor")
+        currentNoteIndex = MINOR_NOTES.indexOf(chordList[chordIndex])
+        if (currentNoteIndex === -1) {
+          Alert.alert("Not a Chord!");
+          return;
+        }
+        console.log(currentNoteIndex)
+        transposedChordList.push(MINOR_NOTES[(currentNoteIndex - transpose + MINOR_NOTES.length) % MINOR_NOTES.length])
+        console.log(transposedChordList)
+
+      } else {
+        console.log(currentNoteIndex)
+        transposedChordList.push(NOTES[(currentNoteIndex - transpose + NOTES.length) % NOTES.length])
+        console.log(transposedChordList)
+      }
     }
+    
+    
     setTransposedChordList(transposedChordList)
 
   }

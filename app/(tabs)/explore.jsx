@@ -1,6 +1,6 @@
 import guitarbg from '@/assets/images/guitarbg.png';
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, Text, TextInput, View, Pressable } from 'react-native';
+import { Alert, ImageBackground, StyleSheet, Text, TextInput, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -16,17 +16,21 @@ export default function Index() {
     console.log("You entered the chords: " + chords + "\nTranspose: " + transpose)
     let transposedChordList = []
     
-    let currentNote = NOTES.indexOf(chords)
-    if (currentNote === -1) {
-      currentNote = MINOR_NOTES.indexOf(chords)
-      
-      console.log(currentNote)
-      transposedChordList.push(MINOR_NOTES[(currentNote - transpose + MINOR_NOTES.length) % MINOR_NOTES.length])
+    let currentNodeIndex = NOTES.indexOf(chords.toUpperCase())
+    if (currentNodeIndex === -1) {
+      console.log("Trying with minor")
+      currentNodeIndex = MINOR_NOTES.indexOf(chords)
+      if (currentNodeIndex === -1) {
+        Alert.alert("Not a Chord!");
+        return;
+      }
+      console.log(currentNodeIndex)
+      transposedChordList.push(MINOR_NOTES[(currentNodeIndex - transpose + MINOR_NOTES.length) % MINOR_NOTES.length])
       console.log(transposedChordList)
 
     } else {
-      console.log(currentNote)
-      transposedChordList.push(NOTES[(currentNote - transpose + NOTES.length) % NOTES.length])
+      console.log(currentNodeIndex)
+      transposedChordList.push(NOTES[(currentNodeIndex - transpose + NOTES.length) % NOTES.length])
       console.log(transposedChordList)
     }
     setTransposedChordList(transposedChordList)
@@ -79,7 +83,9 @@ export default function Index() {
             ))}
           </View>
 
-          <Text style={styles.text} >We are SO BACK..</Text>
+          <Text style={{   color: 'white', fontSize: 16, fontWeight: 600, margin: 20, padding: 10, width: "70%"}} >
+            Transpose: what fret the capo will be
+          </Text>
  
         </ImageBackground>
       </View>

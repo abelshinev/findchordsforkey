@@ -80,14 +80,10 @@ export default function Index() {
             <Text style={styles.buttonText}>Get Chords</Text>
           </Pressable>
 
-          <View style={styles.results}>
-
-            {transposedChordList.map((val, index) => (
-              
-              <Text key={index} style={styles.resultText}>
-                val {"-->"} {val}
-              </Text>
-            ))}
+          <View style={styles.resultBox}>
+            <Text style={styles.resultText}>
+              {transposedChordList.join(', ')}
+            </Text>
           </View>
 
           <Text style={{   color: 'white', fontSize: 16, fontWeight: 600, margin: 20, padding: 10, width: "70%"}} >
@@ -150,6 +146,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     marginBottom: 6,
+    textAlign: 'center',
   },
   button: {
     padding: 9,
@@ -163,4 +160,14 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     paddingHorizontal: 10
   },
+
+  resultBox: {
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    padding: 10,
+    margin: 20,
+    borderRadius: 5,
+    borderColor: 'grey',
+    borderWidth: 2,
+    width: "70%"
+  }
 });

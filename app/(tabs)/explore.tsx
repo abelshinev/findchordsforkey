@@ -3,10 +3,6 @@ import React, { useState } from 'react';
 import { Alert, Button, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-const CHORDS_LOC = [0, 2, 2, 1, 2, 2, 2];
-const MAJ_MIN_MAP = [1, 0, 0, 1, 1, 0, 2];
-const CH_NUM = ["I", "ii", "iii", "IV", "V", "vi", "vii°"];
 
 export default function Index() {
   
